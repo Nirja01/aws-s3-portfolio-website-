@@ -15,7 +15,7 @@ A personal portfolio website hosted entirely on AWS S3 using static website host
 - HTML/CSS
 
 ## Live Website
-[Click here to view live website](file:///Users/nirjabhattarai/Downloads/index.html)
+[Click here to view live website]((http://nirja-portfolio-website.s3-website.us-east-2.amazonaws.com))
 
 ## What I Learned
 - Cloud object storage concepts
