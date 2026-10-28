@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nirja Bhattarai | Cloud & CS Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+        :root{
+            --bg:#f8f7f5;
+            --white:#ffffff;
+            --surface:#f2f0ed;
+            --rose:#c17c8a;
+            --rose-light:#e8c5cc;
+            --rose-pale:#f9f0f2;
+            --sage:#7a9e8e;
+            --sage-light:#b8d4c8;
+            --sage-pale:#eef5f2;
+            --lavender:#8b7db5;
+            --lav-pale:#f0edf8;
+            --text:#1a1a2e;
+            --text2:#4a4a6a;
+            --muted:#8a8aaa;
+            --border:rgba(90,80,120,0.1);
+        }
+        html{scroll-behavior:smooth}
+        body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-weight:300;overflow-x:hidden}
+        body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(circle,rgba(193,124,138,0.05) 1px,transparent 1px);background-size:32px 32px;pointer-events:none;z-index:0}
+        .blob1,.blob2{position:fixed;border-radius:50%;filter:blur(100px);pointer-events:none;z-index:0}
+        .blob1{width:500px;height:500px;background:#dcc5cb;top:-150px;right:-100px;opacity:.18;animation:f1 18s ease-in-out infinite}
+        .blob2{width:400px;height:400px;background:#b8c8d4;bottom:0;left:-100px;opacity:.15;animation:f2 22s ease-in-out infinite}
+        @keyframes f1{0%,100%{transform:translate(0,0)}50%{transform:translate(-20px,18px)}}
+        @keyframes f2{0%,100%{transform:translate(0,0)}50%{transform:translate(18px,-20px)}}
+
+        nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.1rem 3rem;display:flex;justify-content:space-between;align-items:center;background:rgba(248,247,245,0.94);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+        .logo{font-family:'Fraunces',serif;font-size:1.3rem;font-style:italic;color:var(--text);letter-spacing:-.01em}
+        .logo-dot{color:var(--rose);margin-left:2px}
+        nav ul{display:flex;gap:2.5rem;list-style:none}
+        nav a{color:var(--muted);text-decoration:none;font-size:.82rem;font-weight:500;transition:color .2s;letter-spacing:.04em;text-transform:uppercase}
+        nav a:hover{color:var(--rose)}
+        .nav-cta{background:var(--text);color:#fff!important;padding:.45rem 1.1rem;border-radius:100px;font-size:.78rem!important;transition:all .2s!important}
+        .nav-cta:hover{background:var(--rose)!important;color:#fff!important}
+
+        .hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;padding:8rem 3rem 4rem;max-width:1200px;margin:0 auto;position:relative;z-index:1}
+        .hero-tag{display:inline-flex;align-items:center;gap:8px;background:var(--sage-pale);border:1px solid rgba(122,158,142,.25);border-radius:4px;padding:.35rem 1rem;font-size:.72rem;color:var(--sage);font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:2rem}
+        .dot{width:6px;height:6px;background:var(--sage);border-radius:50%;animation:blink 2s infinite}
+        @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+        h1{font-family:'Fraunces',serif;font-size:clamp(3rem,6vw,5.5rem);line-height:1.05;font-weight:600;margin-bottom:1.5rem;letter-spacing:-.02em}
+        h1 .accent{font-style:italic;color:var(--rose)}
+        h1 .dim{color:var(--muted);font-size:.6em;font-weight:400;display:block;margin-bottom:.3rem;font-style:italic}
+        .sub{font-size:.95rem;color:var(--text2);line-height:1.85;margin-bottom:2.5rem;font-weight:400;max-width:480px}
+        .sub strong{color:var(--text);font-weight:600}
+        .btns{display:flex;gap:.75rem;flex-wrap:wrap}
+        .btn{padding:.75rem 1.75rem;border-radius:6px;font-size:.82rem;font-weight:600;text-decoration:none;transition:all .22s;font-family:'Inter',sans-serif;letter-spacing:.03em;display:inline-flex;align-items:center;gap:.4rem}
+        .btn-p{background:var(--text);color:#fff}
+        .btn-p:hover{background:var(--rose);transform:translateY(-1px)}
+        .btn-o{background:transparent;color:var(--text);border:1.5px solid rgba(26,26,46,.2)}
+        .btn-o:hover{border-color:var(--rose);color:var(--rose);transform:translateY(-1px)}
+        .stats{display:flex;gap:2rem;margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)}
+        .stat-n{font-family:'Fraunces',serif;font-size:2rem;color:var(--text);font-weight:600;line-height:1}
+        .stat-l{font-size:.7rem;color:var(--muted);margin-top:.25rem;font-weight:500;letter-spacing:.05em;text-transform:uppercase}
+
+        .hero-right{display:flex;flex-direction:column;gap:1rem;position:relative}
+        .hero-card{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:1.5rem;box-shadow:0 2px 20px rgba(90,80,120,.06)}
+        .hero-card-main{padding:2rem;background:linear-gradient(135deg,#f9f0f2,#f0edf8)}
+        .hc-label{font-size:.68rem;color:var(--muted);font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.5rem}
+        .hc-value{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:600;color:var(--text);font-style:italic}
+        .hc-sub{font-size:.8rem;color:var(--text2);margin-top:.25rem}
+        .hc-row{display:flex;align-items:center;gap:.75rem}
+        .hc-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+        .ic-rose{background:var(--rose-pale)}
+        .ic-sage{background:var(--sage-pale)}
+        .ic-lav{background:var(--lav-pale)}
+        .hc-text{font-size:.83rem;font-weight:500;color:var(--text)}
+        .hc-text small{display:block;color:var(--muted);font-weight:400;font-size:.75rem;margin-top:.1rem}
+        .pill{display:inline-flex;align-items:center;gap:.4rem;background:var(--sage-pale);color:var(--sage);border:1px solid rgba(122,158,142,.2);border-radius:100px;padding:.3rem .85rem;font-size:.72rem;font-weight:600;margin-top:.75rem}
+
+        section{max-width:1200px;margin:0 auto;padding:6rem 3rem;position:relative;z-index:1}
+        .eyebrow{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--rose);margin-bottom:.75rem;font-weight:700;display:flex;align-items:center;gap:.6rem}
+        .eyebrow::after{content:'';flex:0 0 30px;height:1px;background:var(--rose-light)}
+        h2{font-family:'Fraunces',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:600;margin-bottom:3rem;line-height:1.1;letter-spacing:-.02em}
+        h2 em{font-style:italic;color:var(--rose)}
+        h2 .sm{font-size:.55em;color:var(--muted);font-weight:400;display:block;font-style:italic;margin-bottom:.2rem}
+
+        .about-g{display:grid;grid-template-columns:1.2fr 1fr;gap:5rem;align-items:start}
+        .about-text p{color:var(--text2);line-height:1.9;margin-bottom:1.2rem;font-size:.93rem}
+        .about-text strong{color:var(--text);font-weight:600}
+        .honors{display:flex;flex-direction:column;gap:.6rem;margin-top:1.5rem}
+        .honor{display:inline-flex;align-items:center;gap:.6rem;background:var(--rose-pale);border:1px solid rgba(193,124,138,.18);border-radius:8px;padding:.55rem 1rem;font-size:.8rem;color:var(--text2);font-weight:500;width:fit-content}
+        .honor span{color:var(--rose);font-weight:700}
+        .info-card{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:2rem;box-shadow:0 2px 16px rgba(90,80,120,.05)}
+        .info-label{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:1.5rem;font-weight:700}
+        .cert-row{display:flex;align-items:center;gap:.85rem;padding:.85rem 0;border-bottom:1px solid var(--border)}
+        .cert-row:last-child{border-bottom:none}
+        .cert-ic{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+        .cert-name{font-size:.85rem;font-weight:600;color:var(--text)}
+        .cert-b{font-size:.66rem;padding:2px 8px;border-radius:100px;margin-top:4px;display:inline-block;font-weight:600}
+        .b-rose{background:var(--rose-pale);color:var(--rose)}
+        .b-lav{background:var(--lav-pale);color:var(--lavender)}
+        .b-sage{background:var(--sage-pale);color:var(--sage)}
+
+        .sk-g{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+        .sk-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:1.6rem;transition:all .25s;box-shadow:0 1px 10px rgba(90,80,120,.04)}
+        .sk-card:hover{border-color:var(--rose-light);transform:translateY(-3px);box-shadow:0 10px 28px rgba(193,124,138,.12)}
+        .sk-em{font-size:1.8rem;margin-bottom:.85rem}
+        .sk-t{font-family:'Fraunces',serif;font-size:1rem;font-weight:600;margin-bottom:.9rem}
+        .tags{display:flex;flex-wrap:wrap;gap:5px}
+        .tag{font-size:.7rem;padding:3px 9px;border-radius:100px;background:var(--surface);color:var(--text2);border:1px solid var(--border);font-weight:500}
+
+        .pr-g{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem}
+        .pr-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:1.75rem;transition:all .25s;position:relative;box-shadow:0 1px 10px rgba(90,80,120,.04)}
+        .pr-card:hover{border-color:var(--rose-light);transform:translateY(-3px);box-shadow:0 12px 32px rgba(193,124,138,.12)}
+        .pr-num{font-size:.68rem;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.6rem;font-weight:600}
+        .pr-title{font-family:'Fraunces',serif;font-size:1.05rem;font-weight:600;margin-bottom:.65rem;letter-spacing:-.01em}
+        .pr-desc{font-size:.84rem;color:var(--text2);line-height:1.7;margin-bottom:1.1rem}
+        .pr-link{font-size:.76rem;color:var(--rose);text-decoration:none;font-weight:600;letter-spacing:.03em}
+        .pr-link:hover{text-decoration:underline}
+        .pr-status{position:absolute;top:1.4rem;right:1.4rem;font-size:.65rem;padding:3px 10px;border-radius:100px;font-weight:700}
+        .s-live{background:var(--sage-pale);color:var(--sage)}
+        .s-done{background:var(--lav-pale);color:var(--lavender)}
+
+        .cs-g{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+        .cs-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:1.6rem;transition:all .25s;box-shadow:0 1px 10px rgba(90,80,120,.04)}
+        .cs-card:hover{border-color:var(--sage-light);transform:translateY(-2px);box-shadow:0 10px 24px rgba(122,158,142,.1)}
+        .cs-lang{font-size:.68rem;color:var(--sage);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.65rem;font-weight:700}
+        .cs-title{font-family:'Fraunces',serif;font-size:.98rem;font-weight:600;margin-bottom:.65rem}
+        .cs-desc{font-size:.82rem;color:var(--text2);line-height:1.7}
+
+        .ex-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:1.75rem;margin-bottom:1.1rem;box-shadow:0 1px 10px rgba(90,80,120,.04);transition:all .25s}
+        .ex-card:hover{border-color:var(--rose-light);transform:translateY(-1px)}
+        .ex-h{display:flex;justify-content:space-between;align-items:start;margin-bottom:.85rem}
+        .ex-title{font-family:'Fraunces',serif;font-size:1rem;font-weight:600}
+        .ex-co{font-size:.82rem;color:var(--rose);margin-top:.2rem;font-weight:600}
+        .ex-date{font-size:.72rem;color:var(--muted);background:var(--surface);padding:3px 10px;border-radius:100px;white-space:nowrap;font-weight:600}
+        .ex-desc{font-size:.84rem;color:var(--text2);line-height:1.7}
+        .ex-bullets{margin-top:.6rem;padding-left:1rem}
+        .ex-bullets li{font-size:.82rem;color:var(--text2);line-height:1.7;margin-bottom:.3rem}
+
+        .contact-box{background:var(--white);border:1px solid var(--border);border-radius:20px;padding:5rem;text-align:center;position:relative;overflow:hidden;box-shadow:0 4px 30px rgba(90,80,120,.07)}
+        .contact-box::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--rose-light),var(--sage-light),var(--rose-light))}
+        .contact-box h2{margin-bottom:1rem}
+        .contact-box p{color:var(--text2);max-width:400px;margin:0 auto 2.5rem;line-height:1.8;font-size:.93rem}
+        .contact-btns{display:flex;justify-content:center;gap:.75rem;flex-wrap:wrap}
+
+        .divider{border:none;border-top:1px solid var(--border);max-width:1200px;margin:0 auto}
+        footer{text-align:center;padding:1.75rem;color:var(--muted);font-size:.8rem;position:relative;z-index:1;border-top:1px solid var(--border)}
+        footer span{color:var(--rose);font-weight:600}
+
+        @media(max-width:900px){
+            .hero{grid-template-columns:1fr;padding:7rem 1.5rem 3rem}
+            .hero-right{display:none}
+            section{padding:4rem 1.5rem}
+            .about-g,.sk-g,.pr-g,.cs-g{grid-template-columns:1fr}
+            nav{padding:1rem 1.5rem}
+            nav ul{display:none}
+            .stats{gap:1.5rem}
+            .contact-box{padding:2.5rem 1.5rem}
+            .ex-h{flex-direction:column;gap:.4rem}
+        }
+    </style>
+</head>
+<body>
+<div class="blob1"></div><div class="blob2"></div>
+
+<nav>
+    <div class="logo">Nirja Bhattarai<span class="logo-dot">.</span></div>
+    <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#contact" class="nav-cta">Hire Me</a></li>
+    </ul>
+</nav>
+
+<div class="hero">
+    <div class="hero-left">
+        <div class="hero-tag"><div class="dot"></div> Available · CPT Eligible</div>
+        <h1>
+            <span class="dim">hi, i'm</span>
+            Nirja<br>
+            <span class="accent">Bhattarai</span>
+        </h1>
+        <p class="sub">
+            <strong>CS Student, Cloud Engineer & QA Specialist</strong> based in Bristow, Virginia.
+            Teaching Assistant · AI Support · CTF Researcher · CompTIA Cloud+ candidate.
+            Dean's List · Summa Cum Laude.
+        </p>
+        <div class="btns">
+            <a href="#projects" class="btn btn-p">View Projects →</a>
+            <a href="#contact" class="btn btn-o">Get In Touch</a>
+        </div>
+        <div class="stats">
+            <div><div class="stat-n">5+</div><div class="stat-l">AWS Projects</div></div>
+            <div><div class="stat-n">TA</div><div class="stat-l">AI Course</div></div>
+            <div><div class="stat-n">CTF</div><div class="stat-l">Researcher</div></div>
+        </div>
+    </div>
+    <div class="hero-right">
+        <div class="hero-card hero-card-main">
+            <div class="hc-label">Currently</div>
+            <div class="hc-value">Building & Teaching</div>
+            <div class="hc-sub">TA · AI Support · Cloud Projects · CTF Research</div>
+            <div class="pill">⚡ Open to opportunities</div>
+        </div>
+        <div class="hero-card">
+            <div class="hc-row">
+                <div class="hc-icon ic-rose">☁️</div>
+                <div class="hc-text">5+ AWS Cloud Projects<small>S3, Lambda, EC2, RDS, DynamoDB</small></div>
+            </div>
+        </div>
+        <div class="hero-card">
+            <div class="hc-row">
+                <div class="hc-icon ic-sage">🏆</div>
+                <div class="hc-text">Academic Excellence<small>Dean's List · Summa Cum Laude</small></div>
+            </div>
+        </div>
+        <div class="hero-card">
+            <div class="hc-row">
+                <div class="hc-icon ic-lav">🔐</div>
+                <div class="hc-text">CTF & Cybersecurity Research<small>NCAE-C Funded Project</small></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr class="divider">
+
+<section id="about">
+    <div class="eyebrow">About</div>
+    <div class="about-g">
+        <div class="about-text">
+            <h2><span class="sm">who i am</span>CS Student,<br><em>Builder & Researcher</em></h2>
+            <p>I'm a Computer Science junior at <strong>Marymount University</strong> in Arlington, Virginia. I transferred from <strong>Northern Virginia Community College</strong> where I graduated Summa Cum Laude and currently hold Dean's List honors at Marymount.</p>
+            <p>My work spans <strong>cloud engineering, software testing, AI support, and cybersecurity research</strong>. This summer I'm serving as a <strong>Teaching Assistant for AI</strong> and providing <strong>AI Technical Support</strong> for interns across campus while building cloud projects independently.</p>
+            <p>I'm also a contributor to an <strong>NCAE-C funded CTF research project</strong> with Arlington Public Schools & NOVA, building challenges across web security, cryptography, and AI-enabled attack/defense. I'm an active member of <strong>Cyber Clinic</strong> and <strong>Women in Cybersecurity (WiCyS)</strong>.</p>
+            <div class="honors">
+                <div class="honor"><span>🏆</span> Dean's List — Marymount University, Fall 2025</div>
+                <div class="honor"><span>🌟</span> Summa Cum Laude — NOVA, 2023–2025</div>
+                <div class="honor"><span>🔐</span> NCAE-C Funded CTF Research Contributor</div>
+            </div>
+        </div>
+        <div>
+            <div class="info-card">
+                <div class="info-label">Certifications & Goals</div>
+                <div class="cert-row">
+                    <div class="cert-ic ic-rose">☁️</div>
+                    <div><div class="cert-name">CompTIA Cloud+</div><span class="cert-b b-rose">In Progress</span></div>
+                </div>
+                <div class="cert-row">
+                    <div class="cert-ic ic-lav">🔐</div>
+                    <div><div class="cert-name">CompTIA Security+</div><span class="cert-b b-lav">Planned Next</span></div>
+                </div>
+                <div class="cert-row">
+                    <div class="cert-ic" style="background:#faf5e4">🟡</div>
+                    <div><div class="cert-name">AWS Solutions Architect</div><span class="cert-b b-lav">Planned</span></div>
+                </div>
+                <div class="cert-row">
+                    <div class="cert-ic ic-sage">🎓</div>
+                    <div><div class="cert-name">B.S. Computer Science</div><span class="cert-b b-sage">Expected May 2027</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr class="divider">
+
+<section id="skills">
+    <div class="eyebrow">Skills</div>
+    <h2><span class="sm">what i use</span>Technical<br><em>Skills</em></h2>
+    <div class="sk-g">
+        <div class="sk-card">
+            <div class="sk-em">☁️</div>
+            <div class="sk-t">Cloud & AWS</div>
+            <div class="tags">
+                <span class="tag">EC2</span><span class="tag">S3</span><span class="tag">RDS</span>
+                <span class="tag">Lambda</span><span class="tag">VPC</span><span class="tag">CloudWatch</span>
+                <span class="tag">EventBridge</span><span class="tag">IAM</span><span class="tag">DynamoDB</span><span class="tag">API Gateway</span>
+            </div>
+        </div>
+        <div class="sk-card">
+            <div class="sk-em">🧪</div>
+            <div class="sk-t">Testing & QA</div>
+            <div class="tags">
+                <span class="tag">Selenium (Python)</span><span class="tag">Test Case Design</span>
+                <span class="tag">Functional Testing</span><span class="tag">Regression Testing</span>
+                <span class="tag">Boundary Testing</span><span class="tag">Defect Tracking</span>
+                <span class="tag">Bug Reporting</span>
+            </div>
+        </div>
+        <div class="sk-card">
+            <div class="sk-em">🤖</div>
+            <div class="sk-t">AI & Programming</div>
+            <div class="tags">
+                <span class="tag">Python</span><span class="tag">Java</span><span class="tag">C</span>
+                <span class="tag">HTML/CSS</span><span class="tag">Prompt Evaluation</span>
+                <span class="tag">AI Output Review</span><span class="tag">GitHub</span><span class="tag">boto3</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr class="divider">
+
+<section id="projects">
+    <div class="eyebrow">Cloud Projects</div>
+    <h2><span class="sm">things i've built on aws</span>Cloud<br><em>Projects</em></h2>
+    <div class="pr-g">
+        <div class="pr-card">
+            <span class="pr-status s-live">Live ↗</span>
+            <div class="pr-num">Project 01</div>
+            <div class="pr-title">Static Portfolio Website on AWS S3</div>
+            <div class="pr-desc">Deployed this portfolio using AWS S3 static website hosting. Configured bucket policies, public access settings, and CORS.</div>
+            <div class="tags" style="margin-bottom:1.1rem">
+                <span class="tag">AWS S3</span><span class="tag">Bucket Policy</span><span class="tag">HTML/CSS</span>
+            </div>
+            <a href="http://nirja-portfolio-website.s3-website.us-east-2.amazonaws.com" target="_blank" class="pr-link">View Live →</a>
+            &nbsp;&nbsp;
+            <a href="https://github.com/Nirja01/aws-s3-portfolio-website" target="_blank" class="pr-link">GitHub →</a>
+        </div>
+        <div class="pr-card">
+            <span class="pr-status s-done">Done</span>
+            <div class="pr-num">Project 02</div>
+            <div class="pr-title">AWS Cost Monitoring & Billing Alerts</div>
+            <div class="pr-desc">Configured AWS Budgets with zero-spend threshold and automated email alerts to prevent unexpected charges.</div>
+            <div class="tags" style="margin-bottom:1.1rem">
+                <span class="tag">AWS Budgets</span><span class="tag">Billing Alerts</span><span class="tag">Cost Management</span>
+            </div>
+            <a href="https://github.com/Nirja01/aws-cost-monitoring" target="_blank" class="pr-link">GitHub →</a>
+        </div>
+        <div class="pr-card">
+            <span class="pr-status s-done">Done</span>
+            <div class="pr-num">Project 03</div>
+            <div class="pr-title">Serverless Automated Backup System</div>
+            <div class="pr-desc">Python Lambda function that automatically creates timestamped backups in S3 daily via EventBridge scheduler.</div>
+            <div class="tags" style="margin-bottom:1.1rem">
+                <span class="tag">Lambda</span><span class="tag">S3</span><span class="tag">EventBridge</span><span class="tag">Python</span><span class="tag">IAM</span>
+            </div>
+            <a href="https://github.com/Nirja01/aws-lambda-backup-system" target="_blank" class="pr-link">GitHub →</a>
+        </div>
+        <div class="pr-card">
+            <span class="pr-status s-done">Done</span>
+            <div class="pr-num">Project 04</div>
+            <div class="pr-title">Multi-Tier Infrastructure on EC2 + RDS</div>
+            <div class="pr-desc">Deployed EC2 server and RDS MySQL database inside a custom VPC with public/private subnets and security groups.</div>
+            <div class="tags" style="margin-bottom:1.1rem">
+                <span class="tag">EC2</span><span class="tag">RDS MySQL</span><span class="tag">VPC</span><span class="tag">Security Groups</span>
+            </div>
+            <a href="https://github.com/Nirja01/aws-ec2-rds-webapp" target="_blank" class="pr-link">GitHub →</a>
+        </div>
+        <div class="pr-card">
+            <span class="pr-status s-done">Done</span>
+            <div class="pr-num">Project 05</div>
+            <div class="pr-title">Serverless URL Shortener</div>
+            <div class="pr-desc">Built a serverless URL shortener using AWS Lambda, DynamoDB and API Gateway — similar to bit.ly but built from scratch on AWS.</div>
+            <div class="tags" style="margin-bottom:1.1rem">
+                <span class="tag">Lambda</span><span class="tag">DynamoDB</span><span class="tag">API Gateway</span><span class="tag">Python</span>
+            </div>
+            <a href="https://github.com/Nirja01/aws-url-shortener" target="_blank" class="pr-link">GitHub →</a>
+        </div>
+    </div>
+
+    <br><br>
+    <div class="eyebrow">CS & QA Projects</div>
+    <h2><span class="sm">software engineering & testing</span>Academic<br><em>Projects</em></h2>
+    <div class="cs-g">
+        <div class="cs-card">
+            <div class="cs-lang">🧪 Python · Selenium</div>
+            <div class="cs-title">Software Testing & Test Automation</div>
+            <div class="cs-desc">Designed and executed a full QA testing cycle for a live web app. Authored 5 structured test cases, built Selenium automation scripts, and wrote an 8+ page professional test report.</div>
+        </div>
+        <div class="cs-card">
+            <div class="cs-lang">☕ Java</div>
+            <div class="cs-title">Restaurant Order Management System</div>
+            <div class="cs-desc">OOP-based order management system with menu items, order processing, cost calculations, and input validation.</div>
+        </div>
+        <div class="cs-card">
+            <div class="cs-lang">🐍 Python · Research</div>
+            <div class="cs-title">Open-Source Architecture Analysis</div>
+            <div class="cs-desc">Analyzed open-source Python project architecture, documented layered system design and software design patterns.</div>
+        </div>
+    </div>
+</section>
+
+<hr class="divider">
+
+<section id="experience">
+    <div class="eyebrow">Experience</div>
+    <h2><span class="sm">where i've been</span>Work &<br><em>Research</em></h2>
+
+    <div class="ex-card">
+        <div class="ex-h">
+            <div><div class="ex-title">AI Technical Support for Interns</div><div class="ex-co">Marymount University</div></div>
+            <div class="ex-date">Summer 2026</div>
+        </div>
+        <ul class="ex-bullets">
+            <li>Provide front-line troubleshooting for AI tools/platforms used across campus, resolving issues and escalating recurring bugs</li>
+            <li>Evaluate AI-generated responses for accuracy and helpfulness, flagging outputs that need review</li>
+        </ul>
+    </div>
+
+    <div class="ex-card">
+        <div class="ex-h">
+            <div><div class="ex-title">Teaching Assistant — Artificial Intelligence</div><div class="ex-co">Marymount University</div></div>
+            <div class="ex-date">Summer 2026</div>
+        </div>
+        <ul class="ex-bullets">
+            <li>Reviewed student work for errors and clarity; gave structured feedback on gaps in understanding</li>
+            <li>Communicated technical concepts clearly to students at varying skill levels</li>
+        </ul>
+    </div>
+
+    <div class="ex-card">
+        <div class="ex-h">
+            <div><div class="ex-title">Research Assistant — Cybersecurity Mentorship CTF Project</div><div class="ex-co">Marymount University · NCAE-C Funded</div></div>
+            <div class="ex-date">In Progress</div>
+        </div>
+        <ul class="ex-bullets">
+            <li>NCAE-C funded project with Arlington Public Schools & NOVA</li>
+            <li>Build CTF challenges spanning web security, network forensics, cryptography, and AI-enabled attack/defense</li>
+            <li>Support research/assessment side including the Cybersecurity Capital Survey (CCS) instrument</li>
+        </ul>
+    </div>
+
+    <div class="ex-card">
+        <div class="ex-h">
+            <div><div class="ex-title">Cyber Clinic Member</div><div class="ex-co">Marymount University · Arlington, Virginia</div></div>
+            <div class="ex-date">Sep 2025 – Present</div>
+        </div>
+        <div class="ex-desc">Participating in hands-on cybersecurity training and collaborative security projects. Supporting community initiatives promoting cybersecurity awareness.</div>
+    </div>
+
+    <div class="ex-card">
+        <div class="ex-h">
+            <div><div class="ex-title">Member — Women in Cybersecurity (WiCyS)</div><div class="ex-co">WiCyS National Organization</div></div>
+            <div class="ex-date">Oct 2025 – Present</div>
+        </div>
+        <div class="ex-desc">Engaging in cybersecurity networking events and professional development opportunities.</div>
+    </div>
+
+    <div class="ex-card">
+        <div class="ex-h">
+            <div><div class="ex-title">Front Desk Assistant</div><div class="ex-co">Jacksonville State University Recreation & Fitness Center</div></div>
+            <div class="ex-date">Aug – Dec 2022</div>
+        </div>
+        <div class="ex-desc">Supported members with check-in, equipment use, and basic technical troubleshooting while managing front-desk operations.</div>
+    </div>
+</section>
+
+<hr class="divider">
+
+<section id="contact">
+    <div class="contact-box">
+        <div class="eyebrow" style="justify-content:center;margin-bottom:1.5rem">Get In Touch</div>
+        <h2><span class="sm">open to opportunities</span>Let's Work<br><em>Together</em></h2>
+        <p>Looking for entry-level cloud, IT, QA, or AI roles in the US. CPT eligible and ready to contribute from day one.</p>
+        <div class="contact-btns">
+            <a href="mailto:nirjabhattarai48@gmail.com" class="btn btn-p">✉ Email Me</a>
+            <a href="https://github.com/Nirja01" target="_blank" class="btn btn-o">GitHub</a>
+            <a href="https://linkedin.com/in/nirja-bhattarai-9bb6a3248" target="_blank" class="btn btn-o">LinkedIn</a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>Deployed on <span>AWS S3</span> · Nirja Bhattarai · Bristow, Virginia · 2026</p>
+</footer>
+</body>
+</html>
